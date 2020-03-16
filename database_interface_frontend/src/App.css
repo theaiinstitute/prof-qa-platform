@@ -1,38 +1,63 @@
-.App {
+.app-container {
+  position: relative;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 10px 2px rgb(206, 206, 206);
+  width: 80%;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  transition: all 0.25s;
+}
+
+.inputs-container{
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  transition: all 0.25s;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.title {
+  background-color: rgb(240, 240, 240);
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-size: x-large;
+  color: rgb(163, 163, 163);
   text-align: center;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.send-button{
+    color: rgb(102, 112, 255) ;
+    background-color: transparent ;
+    border-color:rgb(102, 112, 255) ;
+    border: 2px solid rgb(102, 112, 255) ;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    white-space: normal;
+    border-radius: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    padding: .84rem 2.14rem;
+    font-size: .81rem;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: right;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.send-button:hover{
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    cursor: pointer;
 }

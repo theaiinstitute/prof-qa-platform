@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import UploadForm from './UploadForm';
+import EditForm from './EditForm';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+
+  render() {
+    return (
+      <div className='app-container'>
+
+        <div className='title'>
+          The AI Institue : Q and A interface
+        </div>
+
+        <div className='inputs-container'>
+          <UploadForm />
+          <EditForm />
+        </div>
+
+        <div style={{ textAlign: 'right', margin:'15px' }}>
+          <button type="submit" className='send-button'>Send</button>
+        </div>
+        
+      </div>
+
+    );
+  }
 }
+
 
 export default App;
