@@ -1,10 +1,17 @@
 # DATA BASE INTERFACE BACKEND
 
-* To run the server :
+1. generate models.py file from RDS data base
+```
+python manage.py inspectdb > qa_insertor/models.py
+```
+
+2. run the server :
 
 ```
 python manage.py runserver
 ```
+
+## Special commands
 
 * To run sync the database :
 
