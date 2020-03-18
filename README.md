@@ -4,7 +4,7 @@
 Setup : 
 
 ``` bash
-pip install django
+pip install django djangorestframework django-cors-headers
 ``` 
 
 ## FRONTEND : React
@@ -21,3 +21,20 @@ cd database_interface_frontend
 ```
 npm install
 ```
+
+## CONNECTION FRONT-BACK 
+Make sure to update the values of the following variables to the final endpoints :
+
+* in App.js the global variable
+
+```javascript
+url_django = 'http://127.0.0.1:8000/qa/'
+```
+
+* in settings.py
+
+```python
+CORS_ORIGIN_WHITELIST = 'http://localhost:3000',
+```
+> dont forget the comma at the end (it is a tuple)
+

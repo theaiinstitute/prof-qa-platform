@@ -18,6 +18,27 @@ class EditForm extends Component {
         answer_input: null,
     }
 
+
+    reset = () => {
+        document.getElementById("form-reset").click()
+        this.setState(
+            {
+                input_student_id: null,
+                input_teacher_id: null,
+
+                time_input_start: null,
+                time_input_end: null,
+
+                input_recording_id: null,
+                input_course_part_id: null,
+
+                question_input: null,
+                answer_input: null,
+            }
+        )
+    }
+
+
     collectInfos = (e) => {
         let newstate = {
             input_student_id: document.getElementById("input-student-id").value ? document.getElementById("input-student-id").value : null,
@@ -37,15 +58,15 @@ class EditForm extends Component {
 
     render() {
         return (
-            <form className='border-left' onChange={this.collectInfos}>
+            <form onChange={this.collectInfos}>
                 <p style={{ textAlign: "center" }}>Enter a Q and A pair</p>
                 <br></br>
 
                 <div className="one-row">
                     <label htmlFor="input-student-id" >Student id</label>
                     <label htmlFor="input-teacher-id" >Teacher id</label>
-                    <input type="number" id="input-student-id" className="form-control" step="1"></input>
-                    <input type="number" id="input-teacher-id" className="form-control" step="1"></input>
+                    <input type="number" id="input-student-id" className="form-control" step="1" min="0"></input>
+                    <input type="number" id="input-teacher-id" className="form-control" step="1" min="0"></input>
                 </div>
                 <br></br>
 
@@ -58,10 +79,10 @@ class EditForm extends Component {
                 <br></br>
 
                 <div className="one-row">
-                    <label htmlFor="input-recording-id" >Recording id</label>
+                    <label htmlFor="input-recording-id"  >Recording id</label>
                     <label htmlFor="input-course-part-id" >Course part id</label>
-                    <input type="number" id="input-recording-id" className="form-control" step="1"></input>
-                    <input type="number" id="input-course-part-id" className="form-control" step="1"></input>
+                    <input type="number" id="input-recording-id" className="form-control" step="1" min="0"></input>
+                    <input type="number" id="input-course-part-id" className="form-control" step="1" min="0"></input>
                 </div>
                 <br></br>
 
@@ -72,6 +93,7 @@ class EditForm extends Component {
                 <label htmlFor="answer-input" >Answer</label>
                 <textarea type="text" id="answer-input" className="form-control" style={{ resize: 'vertical' }} rows="4"></textarea>
 
+                <input type="reset" id="form-reset" style={{display:"none"}}></input>
             </form >
 
         );

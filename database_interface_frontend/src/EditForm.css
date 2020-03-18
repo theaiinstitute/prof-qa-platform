@@ -9,10 +9,6 @@
     transition: all 0.25s;
 }
 
-.border-left{
-    border-left: solid #d3d3d3 1px;
-}
-
 
 .form-control {
     display: block;
