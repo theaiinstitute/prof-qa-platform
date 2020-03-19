@@ -25,7 +25,7 @@ SECRET_KEY = '*7&5wh@8orzm9ok0^s233zh^bq72ez62n5$0f13w=t$_oe59ag'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.180.191.115']  # the aws ip adress
 
 
 # Application definition

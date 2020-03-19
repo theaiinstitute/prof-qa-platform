@@ -9,8 +9,9 @@ class App extends Component {
 
   edit_form = React.createRef();
   file_upload = React.createRef();
-  url_django = 'http://127.0.0.1:8000/qa/'
-
+  //url_django = 'http://127.0.0.1:8000/qa/'
+  url_django = 'http://35.180.191.115:8000/qa/'
+  
   handleSubmit = (e) => {
     e.preventDefault();
 

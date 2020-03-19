@@ -4,7 +4,7 @@
 Setup : 
 
 ``` bash
-pip install django djangorestframework django-cors-headers
+pip install django djangorestframework django-cors-headers psycopg2
 ``` 
 
 ## FRONTEND : React
