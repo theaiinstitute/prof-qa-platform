@@ -62,38 +62,59 @@ class EditForm extends Component {
                 <p style={{ textAlign: "center" }}>Enter a Q and A pair</p>
                 <br></br>
 
-                <div className="one-row">
-                    <label htmlFor="input-student-id" >Student id</label>
-                    <label htmlFor="input-teacher-id" >Teacher id</label>
-                    <input type="number" id="input-student-id" className="form-control" step="1" min="0"></input>
-                    <input type="number" id="input-teacher-id" className="form-control" step="1" min="0"></input>
+                <div className="two-columns">
+                    <div style={{ marginRight: "10px" }}>
+
+                        <div className="one-row">
+                            <label htmlFor="time-input-start" >Start time</label>
+                            <label htmlFor="time-input-end" >End time</label>
+                            <input type="time" id="time-input-start" className="form-control" step="1"></input>
+                            <input type="time" id="time-input-end" className="form-control" step="1"></input>
+                        </div>
+                        <br></br>
+                        
+                        <div className="one-row">
+                            <label htmlFor="input-student-id" >Student</label>
+                            <label htmlFor="input-teacher-id" >Teacher</label>
+
+                            <select id="input-student-id" className="form-control">
+                                <option value="">--</option>
+                                {this.props.students.map((student) => (<option key={student["id"]} value={student["id"]}>{student["student_firstname"]+" "+student["student_name"]}</option>))}
+                            </select>
+
+                            <select id="input-teacher-id" className="form-control">
+                                <option value="">--</option>
+                                {this.props.teachers.map((teacher) => (<option key={teacher["id"]} value={teacher["id"]}>{teacher["teacher_firstname"] + " " + teacher["teacher_name"]}</option>))}
+                            </select>
+
+                        </div>
+                        <br></br>
+
+                        <div className="one-row">
+                            <label htmlFor="input-recording-id"  >Recording</label>
+                            <label htmlFor="input-course-part-id" >Course part</label>
+                            <select id="input-recording-id" className="form-control">
+                                <option value="">--</option>
+                                {this.props.recordings.map((recording) => (<option key={recording} value={recording}>{recording}</option>))}
+                            </select>
+                            <select id="input-course-part-id" className="form-control">
+                                <option value="">--</option>
+                                {this.props.courseParts.map((coursePart) => (<option key={coursePart} value={coursePart}>{coursePart}</option>))}
+                            </select>
+                        </div>
+                        <br></br>
+
+                        <label htmlFor="question-input">Question</label>
+                        <textarea type="text" id="question-input" className="form-control" style={{ resize: 'vertical' }} rows="3"></textarea>
+                        
+                    </div>
+
+                    <div style={{marginLeft: "10px"}}>
+                        <label htmlFor="answer-input" >Answer</label>
+                        <textarea type="text" id="answer-input" className="form-control" style={{ resize: 'vertical'}} rows="14"></textarea>
+                        <input type="reset" id="form-reset" style={{ display: "none" }}></input>
+                    </div>
                 </div>
-                <br></br>
-
-                <div className="one-row">
-                    <label htmlFor="time-input-start" >Start time</label>
-                    <label htmlFor="time-input-end" >End time</label>
-                    <input type="time" id="time-input-start" className="form-control" step="1"></input>
-                    <input type="time" id="time-input-end" className="form-control" step="1"></input>
-                </div>
-                <br></br>
-
-                <div className="one-row">
-                    <label htmlFor="input-recording-id"  >Recording id</label>
-                    <label htmlFor="input-course-part-id" >Course part id</label>
-                    <input type="number" id="input-recording-id" className="form-control" step="1" min="0"></input>
-                    <input type="number" id="input-course-part-id" className="form-control" step="1" min="0"></input>
-                </div>
-                <br></br>
-
-                <label htmlFor="question-input">Question</label>
-                <textarea type="text" id="question-input" className="form-control" style={{ resize: 'vertical' }} rows="2"></textarea>
-                <br></br>
-
-                <label htmlFor="answer-input" >Answer</label>
-                <textarea type="text" id="answer-input" className="form-control" style={{ resize: 'vertical' }} rows="4"></textarea>
-
-                <input type="reset" id="form-reset" style={{display:"none"}}></input>
             </form >
 
         );

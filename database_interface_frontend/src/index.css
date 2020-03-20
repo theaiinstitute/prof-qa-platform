@@ -5,7 +5,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #9e9e9e;
-  font-size: large;
 }
 
 input {
@@ -41,8 +40,8 @@ form {
 }
 
 label {
-    display: inline-block;
-    margin-bottom: .5rem;
+    display: block;
+    margin-bottom: 5px;
     font-size: small;
     color: rgb(124, 124, 255);
 }

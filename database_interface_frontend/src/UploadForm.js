@@ -4,7 +4,7 @@ import './UploadForm.css';
 
 class UploadForm extends Component {
     state = {
-        file : null
+        file: null
     }
 
     reset = () => {
@@ -30,7 +30,7 @@ class UploadForm extends Component {
             }
             values.push(obj);
         }
-        return values; 
+        return values;
     }
 
     handleLoad = (e) => {
@@ -41,9 +41,9 @@ class UploadForm extends Component {
     handleError = (e) => {
         alert(e.target.error.name)
     }
-    
+
     handleChange = (e) => {
-        if (document.getElementById('upload-input').value){
+        if (document.getElementById('upload-input').value) {
             let reader = new FileReader();
             reader.readAsText(document.getElementById('upload-input').files[0]);
             reader.onload = this.handleLoad;
@@ -51,40 +51,42 @@ class UploadForm extends Component {
         }
         else {
             this.setState({ file: null });
-        }    
+        }
     }
 
     render() {
         return (
-            <form className='border-left'>
+            <form>
                 <p style={{ textAlign: "center" }}>Upload a file</p>
                 <br></br>
                 <label htmlFor="upload-input" >Upload a csv file containing all the necessary fields</label>
                 <input id="upload-input" type="file" className="upload-control" onChange={this.handleChange} />
-                <input type="reset" id="file-reset" style={{ display: "none"}}></input>
-                <p style={{ marginTop:"50px", textAlign: "left", fontSize:"10px"}}>The uploaded table should look like this example, with the same column labels : </p>
+                <input type="reset" id="file-reset" style={{ display: "none" }}></input>
+                <p style={{ marginTop: "50px", textAlign: "left", fontSize: "10px" }}>The uploaded table should look like this example, with the same column labels : </p>
 
-                <table class="tg">
-                    <tr>
-                        <th class="tg-uy2u">question_input</th>
-                        <th class="tg-uy2u">answer_input</th>
-                        <th class="tg-uy2u">input_course_part_id</th>
-                        <th class="tg-uy2u">input_recording_id</th>
-                        <th class="tg-uy2u">time_input_start</th>
-                        <th class="tg-uy2u">time_input_end</th>
-                        <th class="tg-uy2u">input_student_id</th>
-                        <th class="tg-uy2u">input_teacher_id</th>
-                    </tr>
-                    <tr>
-                        <td class="tg-4a11">question ?</td>
-                        <td class="tg-4a11">answer ...</td>
-                        <td class="tg-4a11">1</td>
-                        <td class="tg-4a11">15</td>
-                        <td class="tg-4a11">1:15:20</td>
-                        <td class="tg-4a11">1:20:13</td>
-                        <td class="tg-4a11">5</td>
-                        <td class="tg-4a11">17</td>
-                    </tr>
+                <table className="tg">
+                    <tbody>
+                        <tr>
+                            <th className="tg-uy2u">question_input</th>
+                            <th className="tg-uy2u">answer_input</th>
+                            <th className="tg-uy2u">input_course_part_id</th>
+                            <th className="tg-uy2u">input_recording_id</th>
+                            <th className="tg-uy2u">time_input_start</th>
+                            <th className="tg-uy2u">time_input_end</th>
+                            <th className="tg-uy2u">input_student_id</th>
+                            <th className="tg-uy2u">input_teacher_id</th>
+                        </tr>
+                        <tr>
+                            <td className="tg-4a11">question ?</td>
+                            <td className="tg-4a11">answer ...</td>
+                            <td className="tg-4a11">1</td>
+                            <td className="tg-4a11">15</td>
+                            <td className="tg-4a11">1:15:20</td>
+                            <td className="tg-4a11">1:20:13</td>
+                            <td className="tg-4a11">5</td>
+                            <td className="tg-4a11">17</td>
+                        </tr>
+                    </tbody>
                 </table>
             </form>
         );
