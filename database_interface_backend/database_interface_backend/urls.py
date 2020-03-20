@@ -19,5 +19,7 @@ from qa_insertor import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('qa/', views.QnAInsertorAPI.as_view())
+    path('qa/', views.QnAInsertorAPI.as_view()),
+    path('students/', views.ListStudents.as_view()),
+    path('teachers/', views.ListTeachers.as_view()),
 ]

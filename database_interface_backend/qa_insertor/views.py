@@ -2,7 +2,16 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db import connections
 
-DATABASE = "test" # or "default"
+DATABASE = "test"  # or "default"
+
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+
 
 def add_row_to_db(edit_form):
 
@@ -12,7 +21,7 @@ def add_row_to_db(edit_form):
     elif any(edit_form[k] == None for k in edit_form):
         return "ERROR : all fields are mandatory"
 
-    else :
+    else:
         try:
             cursor = connections[DATABASE].cursor()
             cursor.execute(
@@ -46,17 +55,18 @@ def add_row_to_db(edit_form):
 
 
 def add_rows_to_db(file_upload):
-        if file_upload["file"] == None:
-            return "OK"
-        else :
-            messages = []
-            for row in file_upload["file"]:
-                messages.append(add_row_to_db(row))
+    if file_upload["file"] == None:
+        return "OK"
+    else:
+        messages = []
+        for row in file_upload["file"]:
+            messages.append(add_row_to_db(row))
 
-            if all(m =="OK" for m in messages):
-                return "OK"
-            else :
-                return "ERROR : check columns labels, input values and csv format"
+        if all(m == "OK" for m in messages):
+            return "OK"
+        else:
+            return "ERROR : check columns labels, input values and csv format"
+
 
 class QnAInsertorAPI(APIView):
     """
@@ -65,7 +75,8 @@ class QnAInsertorAPI(APIView):
 
     def post(self, request):
         data = request.data
-        
+        print(data)
+
         edit_form = data["edit_form"]
         file_upload = data["file_upload"]
 
@@ -76,9 +87,34 @@ class QnAInsertorAPI(APIView):
             response = "OK"
 
         else:
-            response = {
-                'response_form' : response_form,
-                'response_file' : response_file
-            }
+            response = {"response_form": response_form, "response_file": response_file}
 
+        return Response(response)
+
+
+class ListStudents(APIView):
+    """ Lists all students in database"""
+
+    def get(self, request):
+        cursor = connections[DATABASE].cursor()
+        cursor.execute(
+            f"""
+            SELECT id, student_firstname, student_name FROM student;
+        """
+        )
+        response = dictfetchall(cursor)
+        return Response(response)
+
+
+class ListTeachers(APIView):
+    """ Lists all teachers in database"""
+
+    def get(self, request):
+        cursor = connections[DATABASE].cursor()
+        cursor.execute(
+            f"""
+            SELECT id, teacher_firstname, teacher_name FROM teacher;
+        """
+        )
+        response = dictfetchall(cursor)
         return Response(response)

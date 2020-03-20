@@ -20,12 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*7&5wh@8orzm9ok0^s233zh^bq72ez62n5$0f13w=t$_oe59ag'
+with open('secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.180.191.115']  # the aws ip adress
+ALLOWED_HOSTS = []  # dev mode
+#ALLOWED_HOSTS = ['35.180.191.115']  # prod mode
 
 
 # Application definition
@@ -77,12 +79,15 @@ WSGI_APPLICATION = 'database_interface_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+with open('db_password.txt') as f:
+    password = f.read().strip()
+
 DATABASES = {     
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dbtheai',
         'USER': 'theai',
-        'PASSWORD': '@theai_2020',
+        'PASSWORD': password,
         'HOST': 'core-db.czcdgzwouwz1.eu-west-3.rds.amazonaws.com',
         'PORT': '5433',
     },
@@ -91,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dbtheai',
         'USER': 'theai',
-        'PASSWORD': '@theai_2020',
+        'PASSWORD': password,
         'HOST': 'test-db.czcdgzwouwz1.eu-west-3.rds.amazonaws.com',
         'PORT': '5433',
     }
@@ -136,4 +141,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_WHITELIST = 'http://localhost:3000',
+
+CORS_ORIGIN_WHITELIST = 'http://localhost:3000', # dev mode 
+#CORS_ORIGIN_WHITELIST = 'http://35.180.191.115:5000', # prod mode
