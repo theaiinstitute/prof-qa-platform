@@ -83,16 +83,16 @@ with open('db_password.txt') as f:
     password = f.read().strip()
 
 DATABASES = {     
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbtheai',
-        'USER': 'theai',
-        'PASSWORD': password,
-        'HOST': 'core-db.czcdgzwouwz1.eu-west-3.rds.amazonaws.com',
-        'PORT': '5433',
-    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'dbtheai',
+    #     'USER': 'theai',
+    #     'PASSWORD': password,
+    #     'HOST': 'core-db.czcdgzwouwz1.eu-west-3.rds.amazonaws.com',
+    #     'PORT': '5433',
+    # },
     
-    'test': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dbtheai',
         'USER': 'theai',
@@ -140,6 +140,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES" : ('rest_framework.permissions.IsAuthenticated',),
+    "DEFAULT_AUTHENTICATION_CLASSES" : ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+}
+
+DATABASE_ROUTERS = ['qa_insertor.routers.MainRouter',]
 
 
 CORS_ORIGIN_WHITELIST = 'http://localhost:3000', # dev mode 

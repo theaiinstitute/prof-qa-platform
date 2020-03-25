@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from qa_insertor import views
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('qa/', views.QnAInsertorAPI.as_view()),
     path('students/', views.ListStudents.as_view()),
     path('teachers/', views.ListTeachers.as_view()),
+    path('token-obtain/', TokenObtainPairView.as_view()),
+    path('token-refresh/', TokenRefreshView.as_view()),
 ]

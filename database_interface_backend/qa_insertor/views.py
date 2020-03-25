@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db import connections
 
-DATABASE = "test"  # or "default"
+DATABASE = "default"
 
 def dictfetchall(cursor):
     "Return all rows from a cursor as a dict"
@@ -79,15 +79,11 @@ class QnAInsertorAPI(APIView):
 
         edit_form = data["edit_form"]
         file_upload = data["file_upload"]
-
-        response_form = add_row_to_db(edit_form)
-        response_file = add_rows_to_db(file_upload)
-
-        if response_form == "OK" and response_file == "OK":
-            response = "OK"
-
-        else:
-            response = {"response_form": response_form, "response_file": response_file}
+ 
+        response = {
+            "response_form": add_row_to_db(edit_form),
+            "response_file": add_rows_to_db(file_upload)
+        }
 
         return Response(response)
 
