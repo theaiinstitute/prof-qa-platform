@@ -19,10 +19,12 @@ from qa_insertor import views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('qa/', views.QnAInsertorAPI.as_view()),
-    path('students/', views.ListStudents.as_view()),
-    path('teachers/', views.ListTeachers.as_view()),
-    path('token-obtain/', TokenObtainPairView.as_view()),
-    path('token-refresh/', TokenRefreshView.as_view()),
+    path("admin/", admin.site.urls),
+    path("qa/", views.QnAInsertorAPI.as_view()),
+    path("students/", views.ListStudents.as_view()),
+    path("teachers/", views.ListTeachers.as_view()),
+    path("recordings/", views.ListRecordings.as_view()),
+    path("course-parts/", views.ListCourseParts.as_view()),
+    path("token-obtain/", TokenObtainPairView.as_view()),
+    path("token-refresh/", TokenRefreshView.as_view()),
 ]

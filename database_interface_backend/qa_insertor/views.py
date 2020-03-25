@@ -114,3 +114,31 @@ class ListTeachers(APIView):
         )
         response = dictfetchall(cursor)
         return Response(response)
+
+
+class ListRecordings(APIView):
+    """ Lists all recordings in database"""
+
+    def get(self, request):
+        cursor = connections[DATABASE].cursor()
+        cursor.execute(
+            f"""
+            SELECT id, bootcamp_recording_url FROM bootcamp_recording;
+        """
+        )
+        response = dictfetchall(cursor)
+        return Response(response)
+
+
+class ListCourseParts(APIView):
+    """ Lists all course parts in database"""
+
+    def get(self, request):
+        cursor = connections[DATABASE].cursor()
+        cursor.execute(
+            f"""
+            SELECT id, course_part_title FROM course_part;
+        """
+        )
+        response = dictfetchall(cursor)
+        return Response(response)
