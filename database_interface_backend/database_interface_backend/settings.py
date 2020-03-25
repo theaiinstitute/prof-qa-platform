@@ -24,10 +24,10 @@ with open('secret_key.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []  # dev mode
-#ALLOWED_HOSTS = ['35.180.191.115']  # prod mode
+#ALLOWED_HOSTS = []  # dev mode
+ALLOWED_HOSTS = ['35.180.191.115']  # prod mode
 
 
 # Application definition
@@ -149,5 +149,5 @@ REST_FRAMEWORK = {
 DATABASE_ROUTERS = ['qa_insertor.routers.MainRouter',]
 
 
-CORS_ORIGIN_WHITELIST = 'http://localhost:3000', # dev mode 
-#CORS_ORIGIN_WHITELIST = 'http://35.180.191.115:5000', # prod mode
+#CORS_ORIGIN_WHITELIST = 'http://localhost:3000', # dev mode 
+CORS_ORIGIN_WHITELIST = 'http://35.180.191.115:5000', # prod mode
