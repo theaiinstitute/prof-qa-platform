@@ -54,6 +54,15 @@ there are two databases : default and test, to choose which one to connect to pl
 DATABASE = "test"  # or "default"
 ```
 
+### V. Install Django authentification tables
+run the following commands if you want to push or update the django auth tables in the database 
+> make sure you are in the same directory as manage.py
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
 ## FRONTEND : React
 
 ### I. To Setup : 
@@ -70,11 +79,11 @@ npm install
 ```
 
 ### II. To run in dev mode:
-1. activate dev settings in database_interface_frontend/src/App.js
+1. activate dev settings in database_interface_frontend/src/urlBackend.js
 
 ```javascript
-url_django = 'http://127.0.0.1:8000/'  //dev mode
-//url_django = 'http://35.180.191.115:8000/'  // prod mode
+export const url_django = 'http://127.0.0.1:8000/'  //dev mode
+//export const url_django = 'http://35.180.191.115:8000/'  // prod mode
 ```
 
 2. Run local developpement server in database_interface_frontend folder
@@ -83,11 +92,11 @@ npm start
 ```
 
 ### III. To run in prod mode (deploy)
-1. activate prod settings in database_interface_frontend/src/App.js
+1. activate prod settings in database_interface_frontend/src/urlBackend.js
 
 ```javascript
-//url_django = 'http://127.0.0.1:8000/'  //dev mode
-url_django = 'http://35.180.191.115:8000/'  // prod mode
+//export const url_django = 'http://127.0.0.1:8000/'  //dev mode
+export const url_django = 'http://35.180.191.115:8000/'  // prod mode
 ```
 
 2. install serve 
@@ -104,5 +113,3 @@ npm run build
 ```bash
 serve -s build
 ```
-
-
