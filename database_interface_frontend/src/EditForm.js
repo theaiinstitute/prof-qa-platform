@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import './EditForm.css';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+const editorConfiguration = {
+    toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', 'Undo', 'Redo'],
+}
 
 class EditForm extends Component {
-
+    editor = React.createRef();
     state = {
         input_student_id: null,
         input_teacher_id: null,
@@ -20,7 +25,8 @@ class EditForm extends Component {
 
 
     reset = () => {
-        document.getElementById("form-reset").click()
+        document.getElementById("form-reset").click();
+        this.editor.current.editor.setData("");
         this.setState(
             {
                 input_student_id: null,
@@ -38,6 +44,17 @@ class EditForm extends Component {
         )
     }
 
+    handleEditorChange = (e, editor) => {
+        let data = editor.getData()
+        let answer_input = null
+        if (data) {
+            answer_input = data
+        }
+        this.setState({
+            answer_input: answer_input
+        })
+    }
+
 
     collectInfos = (e) => {
         let newstate = {
@@ -51,7 +68,6 @@ class EditForm extends Component {
             input_course_part_id: document.getElementById("input-course-part-id").value ? document.getElementById("input-course-part-id").value : null,
 
             question_input: document.getElementById("question-input").value ? document.getElementById("question-input").value : null,
-            answer_input: document.getElementById("answer-input").value ? document.getElementById("answer-input").value : null,
         }
         this.setState(newstate)
     }
@@ -111,10 +127,17 @@ class EditForm extends Component {
 
                     <div style={{marginLeft: "10px"}}>
                         <label htmlFor="answer-input" >Answer</label>
-                        <textarea type="text" id="answer-input" className="form-control" style={{ resize: 'vertical'}} rows="14"></textarea>
+                        <CKEditor
+                            id="answer-input"
+                            ref= {this.editor}
+                            config={editorConfiguration}
+                            editor={ClassicEditor}
+                            onChange={this.handleEditorChange}
+                        />
+                        <p style={{fontSize:"10px"}}>you can type with LaTeX conventions in the editor</p>
                         <input type="reset" id="form-reset" style={{ display: "none" }}></input>
                     </div>
-                </div>
+                </div>    
             </form >
 
         );
@@ -122,6 +145,3 @@ class EditForm extends Component {
 }
 
 export default EditForm;
-
-
-

@@ -1,81 +1,98 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Interface from './Interface';
+import Login from './Login';
+import { ProtectedRoute } from './ProtectedRoute'
+import { url_django } from './urlBackend';
 import axios from 'axios';
-import './App.css';
-import UploadForm from './UploadForm';
-import EditForm from './EditForm';
 
 
 class App extends Component {
 
-  edit_form = React.createRef();
-  file_upload = React.createRef();
-  state = {
-    students: [],
-    teachers: []
-  }
-  url_django = 'http://127.0.0.1:8000/'  //dev mode
-  //url_django = 'http://35.180.191.115:8000/'  // prod mode
+    loadFromStorage = (key) => {
+        let localData = localStorage.getItem(key);
+        if (localData) {
+            return JSON.parse(localData)
+        }
+        else {
+            return null
+        }
+    }
 
+    saveInStorage = (key, value) => {
+        localStorage.setItem(key, JSON.stringify(value));
+    }
 
-  componentDidMount = () => {
-    axios.get(this.url_django + 'students/')
-      .then(response => {
-        console.log(response.data);
+    initState = () => {
+        let savedState = this.loadFromStorage("state");
+
+        if (savedState) {
+            return savedState;
+        }
+        else {
+            return {
+                isAuthenticated: false,
+                access_token: null,
+                refresh_token: null
+            }
+        }
+    }
+
+    state = this.initState()
+
+    authenticate = (data, callback) => {
         this.setState({
-          students: response.data
-        });
-      });
+            isAuthenticated: true,
+            access_token: data["access"],
+            refresh_token: data["refresh"],
+        },
+            () => {
+                callback();
+                this.saveInStorage("state", this.state);
+            }
+        );
+    }
 
-    axios.get(this.url_django + 'teachers/')
-      .then(response => {
-        console.log(response.data);
+    logout = () => {
+        localStorage.clear();
         this.setState({
-          teachers: response.data
-        });
-      });
-  }
+            isAuthenticated: false,
+            access_token: null,
+            refresh_token: null,
+        })
+    }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+    refreshToken = (callback) => {
+        let data = {
+            refresh: this.state.refresh_token
+        };
 
-    let data = {
-      edit_form: this.edit_form.current.state,
-      file_upload: this.file_upload.current.state
-    };
+        axios.post(url_django + 'token-refresh/', data)
+            .then(
+                response => {
+                    this.setState(
+                        { access_token: response.data.access },
+                        () => {
+                            callback()
+                            this.saveInStorage("state", this.state)
+                        }
+                    )
+                }
+            )
+    }
 
-    axios.post(this.url_django + 'qa/', data)
-      .then(response => {
-        alert(response.data);
-      });
-  }
-
-  handleReset = (e) => {
-    this.edit_form.current.reset()
-    this.file_upload.current.reset()
-  }
-
-  render() {
-    return (
-      <div className='app-container'>
-
-        <div className='title'>
-          The AI Institue : Q and A interface
-        </div>
-
-        <div className='inputs-container'>
-          <EditForm ref={this.edit_form} students={this.state.students} teachers={this.state.teachers} recordings={["r1", "r2"]} courseParts={["p1", "p2"]} />
-          <UploadForm ref={this.file_upload} />
-        </div>
-
-        <div style={{ textAlign: 'right', padding: '20px' }}>
-          <button className='send-button' onClick={this.handleReset}>Reset</button>
-          <button type="submit" className='send-button' onClick={this.handleSubmit}>Send</button>
-        </div>
-
-      </div>
-    );
-  }
+    render() {
+        return (
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/login" render={(props) => <Login {...props} authenticate={this.authenticate.bind(this)}></Login>}></Route>
+                    <ProtectedRoute exact path="/qa" component={Interface} credentials={this.state} refreshToken={this.refreshToken.bind(this)} logout={this.logout.bind(this)}></ProtectedRoute>
+                </Switch>
+            </BrowserRouter>
+        );
+    }
 }
 
-
 export default App;
+
+

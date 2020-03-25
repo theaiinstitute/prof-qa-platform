@@ -1,0 +1,93 @@
+.app-container-login {
+  position: relative;
+  margin-top : 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 10px 2px rgb(206, 206, 206);
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  transition: all 0.25s;
+}
+
+.inputs-container{
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  transition: all 0.25s;
+  text-align: justify;
+}
+
+
+.login-button{
+    color: rgba(102, 112, 255) ;
+    background-color: transparent ;
+    border-color:rgb(102, 112, 255) ;
+    border: 2px solid rgb(102, 112, 255) ;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    white-space: normal;
+    border-radius: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    padding: .84rem 2.14rem;
+    font-size: .81rem;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: right;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.login-button:hover{
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+
+
+.title-login {
+  background-color: rgb(230, 230, 230);
+  padding: 40px;
+  width: auto;
+  font-size: 25px;
+  color: #797979;
+  text-align: center;
+  display: flex; /*added*/
+  flex-direction: column; /*added*/
+}
+
+
+.form-control-auth {
+    display: block;  
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 0;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control-auth:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}

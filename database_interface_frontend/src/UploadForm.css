@@ -5,7 +5,7 @@
     line-height: 1.5;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: 1px solid rgb(200, 200, 200);
     border-radius: 0;
     transition: color, border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     width: 100%;
