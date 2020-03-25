@@ -30,7 +30,7 @@ class Interface extends Component {
       .catch(
         e => {
           this.props.refreshToken(()=>{
-            axios.get(url, config).then(callback).catch(e=>{alert("ERROR : cannot import from database")})
+            axios.get(url, config).then(callback).catch(e=>{console.error("ERROR : cannot import from database")})
           }) 
         }
       )
@@ -62,35 +62,42 @@ class Interface extends Component {
         course_parts: response.data
       });
     })
-
-
-
   }
+
+  alertResponse = (response) => {
+    alert(
+      "Form response : " + response.data["response_form"] + "\n"
+      + "File respose: " + response.data["response_file"]);
+  }
+
+  handleError = (error) => {
+    if (error.response) {
+      alert("Error : The request was made and the server responded with an error");
+    } else if (error.request) {
+      alert("Error : The request was made but no response was received");
+    } else {
+      alert("Error : Something happened in setting up the request and triggered an Error");
+    }
+  }
+
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    let config = {
+      headers: { Authorization: 'Bearer ' + this.props.credentials.access_token }
+    };
 
     let data = {
       edit_form: this.edit_form.current.state,
       file_upload: this.file_upload.current.state
     };
 
-    axios.post(url_django + 'qa/', data)
-      .then(response => {
-
-        alert(
-          "Form response : " + response.data["response_form"] + "\n"
-          + "File respose: " + response.data["response_file"]);
-
-      }).catch((error) => {
-        if (error.response) {
-          alert("Error : The request was made and the server responded with an error");
-        } else if (error.request) {
-          alert("Error : The request was made but no response was received");
-        } else {
-          alert("Error : Something happened in setting up the request and triggered an Error");
-        }
-      });
+    axios.post(url_django + 'qa/', data, config).then(this.alertResponse).catch((error) => {
+      this.props.refreshToken(() => {
+        axios.post(url_django + 'qa/', data, config).then(this.alertResponse).catch(this.handleError)
+      })
+    });
   }
 
   handleReset = (e) => {

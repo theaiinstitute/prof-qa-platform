@@ -111,11 +111,11 @@ class EditForm extends Component {
                             <label htmlFor="input-course-part-id" >Course part</label>
                             <select id="input-recording-id" className="form-control">
                                 <option value="">--</option>
-                                {this.props.recordings.map((recording) => (<option key={recording} value={recording}>{recording}</option>))}
+                                {this.props.recordings.map((recording) => (<option key={recording["id"]} value={recording["id"]}>{recording["bootcamp_recording_url"]}</option>))}
                             </select>
                             <select id="input-course-part-id" className="form-control">
                                 <option value="">--</option>
-                                {this.props.courseParts.map((coursePart) => (<option key={coursePart} value={coursePart}>{coursePart}</option>))}
+                                {this.props.courseParts.map((coursePart) => (<option key={coursePart["id"]} value={coursePart["id"]}>{coursePart["course_part_title"]}</option>))}
                             </select>
                         </div>
                         <br></br>

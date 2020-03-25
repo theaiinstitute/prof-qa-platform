@@ -43,11 +43,18 @@ class UploadForm extends Component {
     }
 
     handleChange = (e) => {
-        if (document.getElementById('upload-input').value) {
-            let reader = new FileReader();
-            reader.readAsText(document.getElementById('upload-input').files[0]);
-            reader.onload = this.handleLoad;
-            reader.onerror = this.handleError;
+        let name = document.getElementById('upload-input').value
+        if (name) {
+            if (name.substring(name.length - 3, name.length) === "csv") {
+                let reader = new FileReader();
+                reader.readAsText(document.getElementById('upload-input').files[0]);
+                reader.onload = this.handleLoad;
+                reader.onerror = this.handleError;
+            }
+            else {
+                alert("the uploaded file should be in csv format")
+                this.reset()
+            }
         }
         else {
             this.setState({ file: null });
