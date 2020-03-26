@@ -94,13 +94,13 @@ class EditForm extends Component {
                             <label htmlFor="input-teacher-id" >Teacher</label>
 
                             <select id="input-student-id" className="form-control">
-                                <option value="">--</option>
-                                {this.props.students.map((student) => (<option key={student["id"]} value={student["id"]}>{student["student_firstname"]+" "+student["student_name"]}</option>))}
+                                <option value="">(id) name</option>
+                                {this.props.students.map((student) => (<option key={student["id"]} value={student["id"]}>{'('+student["id"]+') '+student["student_firstname"]+" "+student["student_name"]}</option>))}
                             </select>
 
                             <select id="input-teacher-id" className="form-control">
-                                <option value="">--</option>
-                                {this.props.teachers.map((teacher) => (<option key={teacher["id"]} value={teacher["id"]}>{teacher["teacher_firstname"] + " " + teacher["teacher_name"]}</option>))}
+                                <option value="">(id) name</option>
+                                {this.props.teachers.map((teacher) => (<option key={teacher["id"]} value={teacher["id"]}>{'('+teacher["id"]+') '+teacher["teacher_firstname"] + " " + teacher["teacher_name"]}</option>))}
                             </select>
 
                         </div>
@@ -110,12 +110,12 @@ class EditForm extends Component {
                             <label htmlFor="input-recording-id"  >Recording</label>
                             <label htmlFor="input-course-part-id" >Course part</label>
                             <select id="input-recording-id" className="form-control">
-                                <option value="">--</option>
-                                {this.props.recordings.map((recording) => (<option key={recording["id"]} value={recording["id"]}>{recording["bootcamp_recording_url"]}</option>))}
+                                <option value="">(id) url</option>
+                                {this.props.recordings.map((recording) => (<option key={recording["id"]} value={recording["id"]}>{'(' + recording["id"]+') '+recording["bootcamp_recording_url"]}</option>))}
                             </select>
                             <select id="input-course-part-id" className="form-control">
-                                <option value="">--</option>
-                                {this.props.courseParts.map((coursePart) => (<option key={coursePart["id"]} value={coursePart["id"]}>{coursePart["course_part_title"]}</option>))}
+                                <option value="">(id) title</option>
+                                {this.props.courseParts.map((coursePart) => (<option key={coursePart["id"]} value={coursePart["id"]}>{'('+coursePart["id"]+') '+ coursePart["course_part_title"]}</option>))}
                             </select>
                         </div>
                         <br></br>

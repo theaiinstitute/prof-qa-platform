@@ -75,7 +75,6 @@ class QnAInsertorAPI(APIView):
 
     def post(self, request):
         data = request.data
-        print(data)
 
         edit_form = data["edit_form"]
         file_upload = data["file_upload"]

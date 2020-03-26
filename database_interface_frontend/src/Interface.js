@@ -17,51 +17,56 @@ class Interface extends Component {
     recordings: []
   }
 
-
-
-  getOrRefreshAndGet = (url, callback) => {
-
-    let config = {
-      headers: { Authorization: 'Bearer ' + this.props.credentials.access_token }
-    };
-
-    axios.get(url, config)
-      .then(callback)
-      .catch(
-        e => {
-          this.props.refreshToken(()=>{
-            axios.get(url, config).then(callback).catch(e=>{console.error("ERROR : cannot import from database")})
-          }) 
-        }
-      )
+  getOrRefreshAndGet = async (url, callback) => {
+    try {
+      let config = {
+        headers: { Authorization: 'Bearer ' + this.props.credentials.access_token }
+      };
+      let response = await axios.get(url, config);
+      callback(response);
+    } catch (error) {
+      try {
+        await this.props.refreshToken();
+        let config = {
+          headers: { Authorization: 'Bearer ' + this.props.credentials.access_token }
+        };
+        let response = await axios.get(url, config);
+        callback(response);
+      } catch {
+        console.error("ERROR : cannot import from database");
+      }
+    }
   }
 
-
-  componentDidMount = () => {
-
-    this.getOrRefreshAndGet(url_django + 'students/', response => {
+  getData = async () => {
+    await this.getOrRefreshAndGet(url_django + 'students/', response => {
       this.setState({
         students: response.data
       });
     })
 
-    this.getOrRefreshAndGet(url_django + 'teachers/', response => {
+    await this.getOrRefreshAndGet(url_django + 'teachers/', response => {
       this.setState({
         teachers: response.data
       });
     })
 
-    this.getOrRefreshAndGet(url_django + 'recordings/', response => {
+    await this.getOrRefreshAndGet(url_django + 'recordings/', response => {
       this.setState({
         recordings: response.data
       });
     })
 
-    this.getOrRefreshAndGet(url_django + 'course-parts/', response => {
+    await this.getOrRefreshAndGet(url_django + 'course-parts/', response => {
       this.setState({
         course_parts: response.data
       });
     })
+
+  }
+
+  componentDidMount = () => {
+    this.getData();
   }
 
   alertResponse = (response) => {
@@ -81,23 +86,35 @@ class Interface extends Component {
   }
 
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-
-    let config = {
-      headers: { Authorization: 'Bearer ' + this.props.credentials.access_token }
-    };
 
     let data = {
       edit_form: this.edit_form.current.state,
       file_upload: this.file_upload.current.state
     };
 
-    axios.post(url_django + 'qa/', data, config).then(this.alertResponse).catch((error) => {
-      this.props.refreshToken(() => {
-        axios.post(url_django + 'qa/', data, config).then(this.alertResponse).catch(this.handleError)
-      })
-    });
+    try {
+      let config = {
+        headers: { Authorization: 'Bearer ' + this.props.credentials.access_token }
+      };
+      let response = await axios.post(url_django + 'qa/', data, config);
+      this.alertResponse(response);
+
+    } catch (error) {
+      try {
+
+        await this.props.refreshToken();
+        let config = {
+          headers: { Authorization: 'Bearer ' + this.props.credentials.access_token }
+        };
+        let response = await axios.post(url_django + 'qa/', data, config);
+        this.alertResponse(response);
+
+      } catch (error) {
+        this.handleError(error);
+      }
+    }
   }
 
   handleReset = (e) => {

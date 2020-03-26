@@ -62,23 +62,20 @@ class App extends Component {
         })
     }
 
-    refreshToken = (callback) => {
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve)
+        });
+    }
+
+    refreshToken = async () => {
         let data = {
             refresh: this.state.refresh_token
         };
 
-        axios.post(url_django + 'token-refresh/', data)
-            .then(
-                response => {
-                    this.setState(
-                        { access_token: response.data.access },
-                        () => {
-                            callback()
-                            this.saveInStorage("state", this.state)
-                        }
-                    )
-                }
-            )
+        let response = await axios.post(url_django + 'token-refresh/', data);
+        await this.setStateAsync({ access_token: response.data.access });
+        this.saveInStorage("state", this.state);              
     }
 
     render() {
