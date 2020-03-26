@@ -1,6 +1,7 @@
 .app-container-login {
   position: relative;
-  margin-top : 50px;
+  margin-top : 25px;
+  margin-bottom: 25px;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
@@ -55,10 +56,11 @@
 
 
 .title-login {
+  font-weight: bold;
   background-color: rgb(230, 230, 230);
   padding: 40px;
   width: auto;
-  font-size: 25px;
+  font-size: 30px;
   color: #797979;
   text-align: center;
   display: flex; /*added*/

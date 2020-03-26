@@ -75,7 +75,7 @@ class EditForm extends Component {
     render() {
         return (
             <form onChange={this.collectInfos}>
-                <p style={{ textAlign: "center" }}>Enter a Q and A pair</p>
+                <p style={{ textAlign: "left", "fontSize":"30px" }}>Enter a Q and A pair</p>
                 <br></br>
 
                 <div className="two-columns">

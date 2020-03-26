@@ -41,7 +41,7 @@ class Login extends Component {
 
                 <div className='inputs-container' >
                     <form style={{ textAlign: "center" }}>
-                        <p style={{ textAlign: "center" }}>Login</p>
+                        <p style={{ textAlign: "center", "fontSize": "30px"}}>Login</p>
                         <br></br>
                         <label htmlFor="username-input" >Username</label>
                         <input type="text" id="username-input" className="form-control-auth"/>

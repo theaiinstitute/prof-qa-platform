@@ -25,10 +25,11 @@
 
 
 .title-qa {
+  font-weight: bold;
   background-color: rgb(230, 230, 230);
   padding: 40px;
   width: auto;
-  font-size: 25px;
+  font-size: 30px;
   color: #797979;
   text-align: center;
   display: flex; /*added*/

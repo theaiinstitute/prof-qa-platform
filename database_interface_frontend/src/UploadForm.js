@@ -64,7 +64,7 @@ class UploadForm extends Component {
     render() {
         return (
             <form>
-                <p style={{ textAlign: "center" }}>Upload a file</p>
+                <p style={{ textAlign: "left", "fontSize": "30px" }}>Upload a file</p>
                 <br></br>
                 <label htmlFor="upload-input" >Upload a csv file containing all the necessary fields</label>
                 <input id="upload-input" type="file" className="upload-control" onChange={this.handleChange} />

@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Text+Me+One');
+
 body {
   margin: 0;
-  font-family: "Roboto",sans-serif;
-  font-weight: 300;
+  font-family: "Text Me One", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #797979;
@@ -53,10 +54,5 @@ label {
     display: block;
     margin-bottom: 5px;
     font-size: small;
-    color: rgb(82, 82, 255);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    color: rgb(0, 0, 255);
 }
